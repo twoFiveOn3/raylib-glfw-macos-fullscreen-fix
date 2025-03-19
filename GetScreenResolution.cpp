@@ -1,7 +1,10 @@
 // I was making a 3D game for a school project and ran into an issue with the raylib library(using openGL and GLFW) where proper fullscreen resolution could not be set with my Mac computer.
-// In windowed form, everything works perfectly, however when using ToggleFullscreen() on a Mac, the picture will cover the whole screen, but will be off center.  I couldn't find much about
-// it online so as a quick fix I wrote a function which uses a bash script to retrieve the screen resolution.  Once these values are retrieved the screen resolution can be set manually and
-// FullScreen can be toggled without it being off center
+// In windowed form, everything works perfectly, however when using ToggleFullscreen() on a Mac, the picture will cover the whole screen, but will be off center.  
+// I couldn't find much about it online so as a quick fix I wrote a function which uses a bash script to retrieve the screen resolution.  Once these values are retrieved,
+// the InitWindow() heigh and width can be set manually, and ToggleFullScreen() show a centered picture.
+//
+// The caveat is that using these values directly as your window width/height locks you into the resolution of your screen, ie not good for 8 bit style games.  However, my guess is that
+// you can scale the retrieved values, preserving the aspect ratio and therefore still getting a centered picture
 
 // Library used was RayLib by raysan5 (https://github.com/raysan5/raylib).  Absolutely love it and would recommend to anyone
 
