@@ -1,0 +1,28 @@
+std::pair<int, int> GetScreenResolution() {
+    int width;
+    int height;
+    std::string junk;
+    char buffer[256];
+    std::string trimmedInput;
+    char cmd[] = "system_profiler SPDisplaysDataType | grep Resolution";  //bash-zsh shell command
+    FILE* pipe = popen(cmd, "r");
+
+    if (!pipe) {
+        TraceLog(LOG_WARNING, "Unable to find display resolution, may result in unexpected behavior");
+        return std::pair{1920, 1080};
+    }
+    while (fgets(buffer, sizeof(buffer), pipe)) {
+        trimmedInput += buffer;
+    }
+    pclose(pipe);
+    trimmedInput.erase(0, trimmedInput.find_first_not_of(" \t"));
+    std::size_t pos = trimmedInput.find("Resolution:");
+    if (pos != std::string::npos) {
+        trimmedInput = trimmedInput.substr(pos + 11); // Move past "Resolution: "
+    }
+    std::stringstream ss(trimmedInput);
+    char x; // For the 'x' separator
+    ss >> width >> x >> height;
+
+    return {width, height};
+}
