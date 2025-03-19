@@ -3,6 +3,8 @@
 // it online so as a quick fix I wrote a function which uses a bash script to retrieve the screen resolution.  Once these values are retrieved the screen resolution can be set manually and
 // FullScreen can be toggled without it being off center
 
+// Library used was RayLib by raysan5 (https://github.com/raysan5/raylib).  Absolutely love it and would recommend to anyone
+
 
 std::pair<int, int> GetScreenResolution() {
     int width;
